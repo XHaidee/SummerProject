@@ -15,6 +15,7 @@ function App() {
     <>
      <BrowserRouter>
      <Routes>
+       <h1>Hello</h1>
         <Route path="/" element={<Layout/>}>
           <Route index  element={<Home/>}/>
           <Route path="cart" element={<Cart/>}/>
