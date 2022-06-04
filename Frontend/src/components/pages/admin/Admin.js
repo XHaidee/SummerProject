@@ -4,11 +4,12 @@ import {Box,Stack,Button} from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { Container } from '@mui/material';
-
 import ManageProduct from './adminCoponents/ManageProduct';
 import ManageOrders from './adminCoponents/ManageOrders';
+import { useNavigate } from 'react-router-dom';
+import { removeToken } from '../../../services/jwtService';
 
-
+//CUSTOM STYLING THE COMPONENT
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -18,8 +19,14 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
-
+//HANDLING LOGOUT SECTION TOKEN REMOVE
 function Admin() {
+  const navigate=useNavigate();
+  const handleLogout=()=>{
+    //DESTROYIN TOKEN
+    removeToken()
+    navigate('/login')
+  }
   return (
    <Container maxWidth="">
      <div>
@@ -49,6 +56,9 @@ function Admin() {
           </Item>
          
         </Grid>
+        <Button variant="outlined" onClick={handleLogout} sx={{color:' #e65c00'}} >
+              Logout
+            </Button>
       </Grid>
     </Box>
     </Container>

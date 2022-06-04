@@ -1,7 +1,10 @@
 import {AppBar,Box,Toolbar,Typography,Button} from '@mui/material'
 import { NavLink } from 'react-router-dom'
-import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone';
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { getToken } from '../services/jwtService';
 const Navbar = () => {
+  const {access_token}=getToken()//TO BE CONTINUED.............
   return (
     <>
     <Box sx={{flexGrow:1}}>
@@ -17,10 +20,14 @@ const Navbar = () => {
                    <Button component={NavLink} to='/' sx={{color:'#cc3300'}} style={({isActive})=>{
                      return{backgroundColor:isActive ?'#ffd426':''}
                    }}>Home</Button>
+                   
                     <Button component={NavLink} to='/cart' sx={{color:'#cc3300'}} style={({isActive})=>{
                      return{backgroundColor:isActive ?'#ffd426':''}
-                   }}><ShoppingCartTwoToneIcon sx={{fontSize:'xl'}}></ShoppingCartTwoToneIcon></Button>                   
-                   
+                   }}><ShoppingCartCheckoutIcon sx={{fontSize:'xl'}}></ShoppingCartCheckoutIcon></Button>
+                   <Button component={NavLink} to='/login' sx={{color:'#cc3300'}} style={({isActive})=>{
+                     return{backgroundColor:isActive ?'#ffd426':''}
+                   }}><AccountCircleIcon sx={{fontSize:'xl'}}></AccountCircleIcon></Button>                            
+                    
                </Toolbar>
            </AppBar>
     </Box>

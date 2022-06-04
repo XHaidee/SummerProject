@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import CardMedia from '@mui/material/CardMedia';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { NavLink } from 'react-router-dom'
 import axios from 'axios';
 import {useState,useEffect} from "react";
@@ -39,6 +40,13 @@ function ManageProduct() {
     catch(error){
       console.log('somthing is wrong');
     }
+  }
+  const handleDelete = async id=>{
+    await axios.delete(`http://127.0.0.1:8000/api/user/productapi/${id}`);
+    var newProduct=products.filter((item)=>{
+      return item.id!==id;
+    })
+    setProducts(newProduct)
   }
 
   return (
@@ -75,12 +83,16 @@ function ManageProduct() {
                         alt="green iguana"
                       />
               </TableCell>
-              <TableCell  align="right"><Button variant="contained" component={NavLink} 
+              <TableCell  align="right" sx={{display:'inline-flex'}}><Button variant="contained" component={NavLink} 
               to={`/edit/${row.id}`}
                sx={{backgroundColor:"#ffe680" ,color:'#e65c00'}} 
                endIcon={<EditIcon />}>
-                     Edit
-                </Button>{row.edit}</TableCell>
+                     
+                </Button>{row.edit}
+                <Button ariant="contained" sx={{backgroundColor:"#ffe680" ,color:'#e65c00'}}>
+                  <DeleteIcon onClick={()=>handleDelete(row.id)}/>
+                </Button>
+                </TableCell>
             </TableRow>
           ))}
         </TableBody>

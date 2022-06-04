@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from api.models import Customer, User,Products,Category
+from api.models import Customer, User,Products,Category,Pro
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 # Register your models here.
@@ -49,3 +49,7 @@ class CustomerModelAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class CustomerModelAdmin(admin.ModelAdmin):
        list_display=['id','category_name']
+
+@admin.register(Pro)
+class CustomerModelAdmin(admin.ModelAdmin):
+       list_display=['name','image']

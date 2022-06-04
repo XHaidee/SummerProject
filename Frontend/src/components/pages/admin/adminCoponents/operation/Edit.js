@@ -2,7 +2,7 @@ import React from 'react'
 import { useState ,useEffect} from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom'
-import { Container } from '@mui/material';
+import { Container,Box,TextField } from '@mui/material';
 import {Table,Button} from '@mui/material';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -16,9 +16,19 @@ import { NavLink } from 'react-router-dom';
 
 const Edit = () => {
    const {id}=useParams();
+   //FETCHING FIRST DATA
    const [product,setProducts]=useState([]);
+
+   //STORING SECOND STATE
+   const [name,setName]=useState("");
+   const [category,setCategroy]=useState("");
+   const [price,setPrice]=useState("");
+   const [quantity,setQuantity]=useState("");
+   const [des,setDes]=useState("");
+   const [image,setImage]=useState();
    useEffect(()=>{
      
+    
 async function getProduct(){
         try{
           const product=await axios.get(`http://127.0.0.1:8000/api/user/productapi/${id}`)
@@ -30,7 +40,7 @@ async function getProduct(){
       }
         getProduct();
       },[id]);
-
+console.log(product.product_name)
 
   return (
     <Container><TableContainer component={Paper}>
@@ -78,7 +88,22 @@ async function getProduct(){
    
       </TableBody>
     </Table>
-  </TableContainer></Container>
+  </TableContainer>
+  <Box>
+            <h1>EDIT PRODUCT</h1>
+          </Box>
+            <TextField  onChange={(evt)=>setName(evt.target.value)} sx={{mt:3,color:'red'}} required fullWidth id='product_name' name="product_name" label="Product Name" />
+           <TextField onChange={(evt)=> setCategroy(evt.target.value)} sx={{mt:3,color:'red'}} required fullWidth id='image' name="category" label="Category" type='number'/> 
+            <TextField onChange={(evt)=> setPrice(evt.target.value)}  sx={{mt:3,color:'red'}} required fullWidth id='Price' name="price" label="price" /> 
+          <TextField onChange={(evt)=> setQuantity(evt.target.value)}  sx={{mt:3,color:'red'}} required fullWidth id='image' name="quantity" label="Quantity" type='number' />
+            <TextField onChange={(evt)=> setDes(evt.target.value)}  sx={{mt:3,color:'red'}} required fullWidth id='desc' name="desc" label="desc" />
+           <TextField onChange={(evt)=>setImage(evt.target.files[0])} sx={{mt:3,color:'red'}} required fullWidth id='image' name="image" label=" " type='file' />
+             <Box textAlign='center'> 
+                 <Button type="submit" onClick={(e)=>{}} sx={{backgroundColor:'#ffd426',color:'#cc3300',
+                 mt:3}}>
+                   Submit Product
+                 </Button>
+             </Box> </Container>
   )
 }
 

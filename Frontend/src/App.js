@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom"; 
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom"; 
 import Contact from "./components/pages/Contact";
 import Layout from "./components/pages/Layout";
 import Home from "./components/pages/Home"
@@ -10,16 +10,18 @@ import Admin from "./components/pages/admin/Admin";
 import ManageProduct from "./components/pages/admin/adminCoponents/ManageProduct";
 import Cart from "./components/pages/cart/Cart";
 import X from "./components/pages/admin/adminCoponents/operation/X";
+import { useSelector } from "react-redux";
 function App() {
+   const {access_token}=useSelector(state=>state.auth)
   return (
     <>
      <BrowserRouter>
      <Routes>
-       <h1>Hello</h1>
+       
         <Route path="/" element={<Layout/>}>
           <Route index  element={<Home/>}/>
           <Route path="cart" element={<Cart/>}/>
-          <Route path="login" element={<LoginReg/>}/>
+          <Route path="login" element={!access_token?<LoginReg/>:<Navigate to="/admin"/>}/>
           <Route path="registration" element={<Reg/>}/>
        </Route> 
           <Route path="admin/" element={<Admin/>}/>            

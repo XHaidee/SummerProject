@@ -1,4 +1,5 @@
 
+from email.policy import default
 from django.contrib.auth.models import User
 from django.db import models
 from django.contrib.auth.models import BaseUserManager,AbstractBaseUser
@@ -109,7 +110,12 @@ class Products(models.Model):
     def __str__(self):
         return self.product_name
 
+#demo for image upload should be deleted
+class Pro(models.Model):
+    name=models.CharField(max_length=20)
+    image=models.ImageField(upload_to='images',default="")
 
-
+    def __str__(self):
+        return self.name
 
     

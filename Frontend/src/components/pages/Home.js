@@ -9,9 +9,14 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import axios from 'axios';
 import {useState,useEffect} from "react";
 import "./customClass.css"
+import { useDispatch } from 'react-redux';
 import { Container } from '@mui/material';
+import { addToCart } from '../../features/counter/cartSlice';
  
+
 const Home = () => {
+
+//FETCHING AND DISPLAY PRODUCTS FROM THE PRODUCT API SECTION
  const [data,setProducts]=useState([]);
  useEffect(()=>{
 getAllProducts();
@@ -20,11 +25,18 @@ async function getAllProducts(){
   try{ 
     const data =await axios.get("http://127.0.0.1:8000/api/user/productapi/")
     setProducts(data.data);
-    console.log(data.data);
+    // console.log(data.data);
   }catch(error){
     console.log("somthing is wrong")
   }
-}
+    }
+
+
+//ADD TO CART SECTION
+const dispatch=useDispatch();
+const handleAddToCart=(data)=>{
+      dispatch(addToCart(data))
+  }
   return (
     <Container maxWidth="md" >
     {
@@ -47,9 +59,12 @@ async function getAllProducts(){
       </CardContent>
       <CardActions>
         <Button sx={{color:'#cc3300'}} size="small">Rs:{data.price}</Button>
-        <AddShoppingCartIcon sx={{color:'#cc3300'}}></AddShoppingCartIcon>
+        <Button sx={{color:'#cc3300'}} size="small" onClick={()=> handleAddToCart(data)}>
+         <AddShoppingCartIcon sx={{color:'#cc3300'}}></AddShoppingCartIcon>
+         </Button>
       </CardActions>
     </Card>
+    
     </div>
     
 

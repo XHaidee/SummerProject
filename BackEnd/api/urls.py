@@ -9,4 +9,5 @@ urlpatterns = [
     path('productapi/', views.ProductView .as_view(),name='productView'),
     path('productapi/<int:pk>/', views.ProductView .as_view(),name='productView'),
     path('categoryapi/', views.CategoryView .as_view(),name='categoryview'),
+    path('proapi/', views.ProView .as_view(),name='proView'),
 ]

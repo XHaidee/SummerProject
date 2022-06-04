@@ -2,7 +2,7 @@ from functools import partial
 from pstats import Stats
 from django.shortcuts import render
 from .models import Products,Category
-from api.serializers import UserLoginSerializer,ProductsSerializers, UserRegistrationSerializer,CategorySerializers
+from api.serializers import UserLoginSerializer,ProductsSerializers, UserRegistrationSerializer,CategorySerializers,ProSeralizers
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
@@ -98,3 +98,12 @@ class CategoryView(APIView):
         pro=Category.objects.all()
         serializer=CategorySerializers(pro,many=True)
         return Response(serializer.data)
+
+#demo this for image post this should be deleted
+class ProView(APIView):
+    def post(self,request,*args,**kwargs):
+        serializer=ProSeralizers(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg':'Data Created'},status=Stats.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
