@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from api.models import Category, Customer, Products, User,Pro
+from api.models import Category, Customer, Products, User
  
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password2=serializers.CharField(style={'input_type':'password'},write_only=True)
@@ -25,7 +25,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
         model=User
         fields=['email','password']
 
-class CustomerSerializer(serializers.ModelSerializer):
+class CustomerSerializers(serializers.ModelSerializer):
     class Meta:
         model=Customer
         fields='__all__'
@@ -39,8 +39,3 @@ class ProductsSerializers(serializers.ModelSerializer):
     class Meta:
         model=Products
         fields='__all__'
-#should be deleted
-class ProSeralizers(serializers.ModelSerializer):
-    class Meta:
-        model=Pro
-        fields=['name','image']

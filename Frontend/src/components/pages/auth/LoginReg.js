@@ -22,7 +22,7 @@ const LoginReg = () => {
   return (
   <>
 <Container maxWidth="xl" sx={{position:'centre'}}>
-   <div><h1> WELCOME TO THE REGISTRATION PAGE</h1></div>
+   <div><h1 style={{textAlign:'center', margin:'2rem'}}> WELCOME TO THE REGISTRATION PAGE</h1></div>
 </Container>
     <Grid container sx={{height:'90vh'}}>
       <Grid item lg={3} sm={2} sx={{

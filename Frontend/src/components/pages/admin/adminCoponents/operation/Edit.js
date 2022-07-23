@@ -26,10 +26,9 @@ const Edit = () => {
    const [quantity,setQuantity]=useState("");
    const [des,setDes]=useState("");
    const [image,setImage]=useState();
-   useEffect(()=>{
-     
-    
-async function getProduct(){
+   //FETCH THE SINGLE PRODUCT
+   useEffect(()=>{  
+     async function getProduct(){
         try{
           const product=await axios.get(`http://127.0.0.1:8000/api/user/productapi/${id}`)
           setProducts(product.data)       
@@ -42,6 +41,7 @@ async function getProduct(){
       },[id]);
 console.log(product.product_name)
 
+//RETURN SEGMENTS
   return (
     <Container><TableContainer component={Paper}>
       <div>

@@ -9,8 +9,11 @@ import AddProducts from "./components/pages/admin/adminCoponents/operation/AddPr
 import Admin from "./components/pages/admin/Admin";
 import ManageProduct from "./components/pages/admin/adminCoponents/ManageProduct";
 import Cart from "./components/pages/cart/Cart";
-import X from "./components/pages/admin/adminCoponents/operation/X";
+import CustomerPage from "./components/pages/customer/CustomerPage";
+
+
 import { useSelector } from "react-redux";
+import SingleProduct from "./components/pages/SingleProduct";
 function App() {
    const {access_token}=useSelector(state=>state.auth)
   return (
@@ -23,11 +26,13 @@ function App() {
           <Route path="cart" element={<Cart/>}/>
           <Route path="login" element={!access_token?<LoginReg/>:<Navigate to="/admin"/>}/>
           <Route path="registration" element={<Reg/>}/>
-       </Route> 
-          <Route path="admin/" element={<Admin/>}/>            
+       
+          <Route path="admin/" element={access_token?<Admin/>:<Navigate to="/"/>}/>            
           <Route path="edit/:id" element={<Edit/>}/>
+          <Route path="singleProduct/:id" element={<SingleProduct/>}/>
           <Route path="add/" element={<AddProducts/>}/>
-          <Route path="x/" element={<X/>}/>
+          <Route path="customer/" element={<CustomerPage/>}/>
+          </Route> 
           
      </Routes> 
      </BrowserRouter>

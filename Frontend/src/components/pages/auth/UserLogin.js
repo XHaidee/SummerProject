@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import { TextField,Button,Box,Alert } from "@mui/material";
+import { TextField,Button,Box } from "@mui/material";
 import { NavLink,useNavigate} from "react-router-dom";
 import { useLoginUserMutation } from '../../../services/userAuthApi';
 import { getToken, storeToken } from '../../../services/jwtService';
@@ -25,34 +25,29 @@ const dispatch=useDispatch();
                email:data.get('email'),
                password:data.get('password'),
            }
-
-          
-if(data.email||data.password!=""){
             const res=await loginUser(actualData)
             if(res.data){
                 //STORING TOKEN
                 storeToken(res.data.token);
                 let {access_token}=getToken();
                 dispatch(setUserToken({access_token:access_token}))
-                navigate('/admin') 
+                navigate('/add')
+                
+                console.log(res.data);
                }
-            console.log(res)
+            // console.log(res)
             setError(res.error.data);
-            const email=res.error.data.email;
+         
             
             if(res.error){
                 if(actualData.email && actualData.password){
 
                  document.getElementById('login-form').reset();
-          
-      
            }
-          
-        // console.log(res.data)
-        //   console.log(res.error)
       }
       
-}
+
+
         // const res=await loginUser(actualData)
         // if(res.error){
         //           if(actualData.email && actualData.password){
@@ -84,9 +79,9 @@ if(data.email||data.password!=""){
           <Box component="form"noValidate sx={{mt:3 ,color:'#cc3300'}} id="login-form"
           onSubmit={handlesubmit}> 
             <TextField required fullWidth id='email' name="email" label="Email Address"/>
-            {error!="" ? <div>{error.email}</div>:""}
+            {error!=="" ? <div>{error.email}</div>:""}
             <TextField sx={{mt:3,color:'red'}} required fullWidth id='password' name="password" label="Password Address" type='password'/>
-            {error!="" ? <div>{error.password}</div>:""}
+            {error!=="" ? <div>{error.password}</div>:""}
              <Box textAlign='center'> 
                  <Button type="submit" sx={{backgroundColor:'#ffd426',color:'#cc3300',
                     mt:3}}>

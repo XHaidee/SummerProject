@@ -39,11 +39,16 @@ function Admin() {
        
         <Grid item xs={12} sm={4} md={3}>
         <Item>
-        <Stack direction="col" spacing={2}>
+        {/* <Stack direction="col" spacing={2}
+        sx={{display: 'inline'}}> */}
             <Button variant="outlined" sx={{color:' #e65c00'}} >
-              Product Management
+              Manage Product 
             </Button>
-        </Stack>
+            <br/>
+            <Button variant="outlined" sx={{color:' #e65c00',top:"5px"}} >
+              Manage Orders
+            </Button>
+        {/* </Stack> */}
         </Item>
         </Grid>
 

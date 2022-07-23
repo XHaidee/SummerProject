@@ -31,7 +31,8 @@ const Reg = () => {
             const res =await registerUser(actualData)
             console.log(res);
             setError(res.error.data);
-            storeToken(res.data.token);            
+            storeToken(res.data.token); 
+                       
           // }
           // else{
              

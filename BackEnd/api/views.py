@@ -1,8 +1,8 @@
 from functools import partial
 from pstats import Stats
 from django.shortcuts import render
-from .models import Products,Category
-from api.serializers import UserLoginSerializer,ProductsSerializers, UserRegistrationSerializer,CategorySerializers,ProSeralizers
+from .models import Products,Category,User,Customer
+from api.serializers import UserLoginSerializer,ProductsSerializers, UserRegistrationSerializer,CategorySerializers,CustomerSerializers
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
@@ -99,11 +99,28 @@ class CategoryView(APIView):
         serializer=CategorySerializers(pro,many=True)
         return Response(serializer.data)
 
-#demo this for image post this should be deleted
-class ProView(APIView):
-    def post(self,request,*args,**kwargs):
-        serializer=ProSeralizers(data=request.data)
+#CUSTOMER VIEW 
+class CustomerView(APIView):
+    def get(self,request,pk=None,format=None):
+        id=pk
+        if id is not None:
+            customer=Customer.objects.get(id=id)
+            serializer=CustomerSerializers(customer)
+            return Response(serializer.data)
+
+    def post(self,request,format=None):
+        serializer=CustomerSerializers(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'msg':'Data Created'},status=Stats.HTTP_201_CREATED)
+            return Response({'msg':'Customer Created'},status=Stats.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+    
+    def put(self,request,pk,fromat=None):
+            id=pk
+            pro=Customer.objects.get(id=id)
+            serializer=CustomerSerializers(pro,data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response({'msg':'Complete Customer Updated'})
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)

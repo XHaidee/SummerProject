@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager,AbstractBaseUser
 
 
+
 class UserManager(BaseUserManager):
     def create_user(self, email, name,tc, password=None,password2=None):
         """
@@ -59,7 +60,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ['name','tc']
 
     def __str__(self):
-        return self.email
+        return self.name
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -85,10 +86,10 @@ class Customer(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     name=models.CharField(max_length=200)
     phone=models.IntegerField()
-    city=models.CharField(max_length=50)
+    address=models.CharField(max_length=50)
     
     def __str__(self):
-        return str(self.id)
+        return str(self.user)
 
 #THE CATEGORY MODEL
 class Category(models.Model):
@@ -110,12 +111,18 @@ class Products(models.Model):
     def __str__(self):
         return self.product_name
 
-#demo for image upload should be deleted
-class Pro(models.Model):
-    name=models.CharField(max_length=20)
-    image=models.ImageField(upload_to='images',default="")
-
-    def __str__(self):
-        return self.name
-
-    
+# THE ORDERS MODEL
+STATUS_CHOICES=(('Accepted','Accepted'),
+('packed','packed'),
+('on the way','on the way'),
+('delivered','delivered'),
+('cancel','cancel')
+)
+class Orders(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    customer=models.ForeignKey(Customer,on_delete=models.CASCADE)
+    product=models.ForeignKey(Products,on_delete=models.CASCADE)
+    quantity=models.PositiveBigIntegerField(default=1)
+    ordered_date=models.DateTimeField(auto_now_add=True)
+    status=models.CharField(max_length=50,choices=STATUS_CHOICES,default='panding')
+     

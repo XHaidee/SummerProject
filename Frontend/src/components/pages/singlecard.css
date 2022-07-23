@@ -1,0 +1,8 @@
+.singlecard-component{
+    -webkit-box-shadow: 0 0 10px gray;
+  box-shadow: 0 0 10px gray;
+  cursor:pointer;
+}
+.singlecard-component:hover{
+    transform:scale(1.01)
+}
