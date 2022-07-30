@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-
+import {ToastContainer,toast} from 'react-toastify'
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
@@ -74,8 +74,11 @@ const handleAddToCart=(data)=>{
       ))
    
 }
+<ToastContainer />
 </Container>
 <br/><br/>
+<ToastContainer />
+
 </>
   );
 }

@@ -17,7 +17,7 @@ export const cartSlice = createSlice({
       );
       if(itemIndex>=0){
         state.cartItems[itemIndex].cartQuantity+=1;
-        toast.info('inc',{position:"bottom-left",});
+        toast.info('product added',{position:"bottom-left",});
       }
       else{
       const tempProduct ={...action.payload,cartQuantity:1};
@@ -32,7 +32,7 @@ export const cartSlice = createSlice({
         )
         state.cartItems=nextCartItems ;
         localStorage.setItem("cartItems",JSON.stringify(state.cartItems));
-        toast.error(`removed item`,
+        toast.error('removed item',
         {
           position:"top-right"
         });
@@ -50,7 +50,7 @@ export const cartSlice = createSlice({
         )
         state.cartItems=nextCartItems ;
         
-        toast.error(`removed item`,
+        toast.error("cart item removed",
         {
           position:"top-right"
         });

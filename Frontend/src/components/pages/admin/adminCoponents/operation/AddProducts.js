@@ -5,7 +5,7 @@ import { useState } from 'react'
 import axios from 'axios';
 
 const AddProducts = () => {
-  const[loginPorduct,{isLoading}]=useLoginPorductMutation()
+  // const[loginPorduct,{isLoading}]=useLoginPorductMutation()
 // PRODUCT STATE
    const [name,setName]=useState("");
    const [category,setCategroy]=useState("");

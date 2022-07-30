@@ -4,7 +4,9 @@ import { NavLink,useNavigate} from "react-router-dom";
 import { useLoginUserMutation } from '../../../services/userAuthApi';
 import { getToken, storeToken } from '../../../services/jwtService';
 import { useDispatch } from 'react-redux';
+import {ToastContainer } from 'react-toastify';
 import { setUserToken } from '../../../features/authentication/authSlice';
+import Home from '../Home';
 const UserLogin = () => {
     const [error,setError]=useState({
         eamil:"",
@@ -31,8 +33,14 @@ const dispatch=useDispatch();
                 storeToken(res.data.token);
                 let {access_token}=getToken();
                 dispatch(setUserToken({access_token:access_token}))
-                navigate('/add')
                 
+                if(res.data.admin==1){
+                    navigate('/admin');
+                }
+                else{
+                navigate('/customer')
+                
+                }
                 console.log(res.data);
                }
             // console.log(res)
@@ -94,7 +102,7 @@ const dispatch=useDispatch();
              <NavLink to="/" style={{textDecoration:"none"}} >
                  <div style={s}> Forgot Password? </div> 
              </NavLink>
-                
+             <ToastContainer />
              </Box>
     </>
   )

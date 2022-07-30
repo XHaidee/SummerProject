@@ -118,11 +118,22 @@ STATUS_CHOICES=(('Accepted','Accepted'),
 ('delivered','delivered'),
 ('cancel','cancel')
 )
-class Orders(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
+class Order(models.Model):
     customer=models.ForeignKey(Customer,on_delete=models.CASCADE)
-    product=models.ForeignKey(Products,on_delete=models.CASCADE)
     quantity=models.PositiveBigIntegerField(default=1)
+    total=models.PositiveBigIntegerField()
     ordered_date=models.DateTimeField(auto_now_add=True)
     status=models.CharField(max_length=50,choices=STATUS_CHOICES,default='panding')
-     
+    def __int__(self):
+        return self.id
+
+class Items(models.Model):
+    order=models.ForeignKey(Order,on_delete=models.CASCADE)
+    products=models.ForeignKey(Products,on_delete=models.CASCADE)
+    quantitys=models.PositiveIntegerField(default=1)
+    def __int__(self):
+        return self.id
+    
+
+
+    

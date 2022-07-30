@@ -1,5 +1,6 @@
   import {Container, Grid,Card,Tabs,Tab,Box } from "@mui/material"
 import { useState } from "react";
+import {ToastContainer } from 'react-toastify';
 import UserLogin from "./UserLogin"
 import Reg from "./Reg"
 const TabPanel=(props)=>{
@@ -50,8 +51,10 @@ const LoginReg = () => {
         backgroundColor:''
         }}>
         <p></p>
-    </Grid>   
+    </Grid> 
+     
   </Grid>
+  <ToastContainer />
   </>
   )}
 

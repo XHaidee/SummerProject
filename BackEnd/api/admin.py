@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from api.models import Customer, User,Products,Category,Orders
+from api.models import Customer, User,Products,Category,Order,Items
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 # Register your models here.
@@ -51,6 +51,10 @@ class CustomerModelAdmin(admin.ModelAdmin):
        list_display=['id','category_name']
 
 #ORDER CATEGORY
-@admin.register(Orders)
+@admin.register(Order)
 class CustomerModelAdmin(admin.ModelAdmin):
-       list_display=['user','customer','product','quantity','ordered_date','status']
+       list_display=['id','customer','quantity','ordered_date','status']
+
+@admin.register(Items)
+class CustomerModelAdmin(admin.ModelAdmin):
+       list_display=['id','order']

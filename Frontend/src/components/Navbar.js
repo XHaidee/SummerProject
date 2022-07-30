@@ -1,5 +1,5 @@
 import {AppBar,Box,Toolbar,Typography,Button} from '@mui/material'
-import { NavLink } from 'react-router-dom'
+import { NavLink ,Navigate} from 'react-router-dom'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { getToken } from '../services/jwtService';
@@ -23,7 +23,7 @@ const Navbar = () => {
                     <Button component={NavLink} to='/cart' sx={{color:'#cc3300'}} style={({isActive})=>{
                      return{backgroundColor:isActive ?'#e6ccb2':''}
                    }}><ShoppingCartCheckoutIcon sx={{fontSize:'xl'}}></ShoppingCartCheckoutIcon></Button>
-                   <Button component={NavLink} to='/login' sx={{color:'#cc3300'}} style={({isActive})=>{
+                   <Button component={NavLink} to={!access_token ? '/login':"/customer"} sx={{color:'#cc3300'}} style={({isActive})=>{
                      return{backgroundColor:isActive ?'#e6ccb2':''}
                    }}><AccountCircleIcon sx={{fontSize:'xl'}}></AccountCircleIcon></Button>                            
                </Toolbar>

@@ -31,6 +31,18 @@ export const userAuthApi = createApi({
           }
       }
   }),
+  getLoggedUser:builder.query({
+    query:(access_token)=>{
+        return{
+            url:'profile/',
+            method:'GET',
+            headers:{
+                Authorization:`Bearer ${access_token}`,
+
+            }
+        }
+    }
+}),
   
   loginPorduct:builder.mutation({
     query:(product)=>{
@@ -50,4 +62,5 @@ export const userAuthApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useRegisterUserMutation ,useLoginUserMutation,useLoginPorductMutation } = userAuthApi
+export const { useRegisterUserMutation ,useLoginUserMutation,useGetLoggedUserQuery
+    ,useLoginPorductMutation } = userAuthApi

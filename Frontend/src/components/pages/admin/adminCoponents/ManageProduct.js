@@ -102,6 +102,7 @@ function ManageProduct() {
                      return{backgroundColor:'#ffd426'}
                    }}>Add Product</Button>
     </>
+    
   );
 }
 

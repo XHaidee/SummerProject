@@ -1,16 +1,20 @@
 import React from 'react'
+import { toast,ToastContainer } from 'react-toastify';
 import { useEffect } from 'react';
 import {
   Table,TableBody,TableContainer,TableCell,TableHead,TableRow,Grid,Paper,CardActions
 } from '@mui/material';
 import {Box,Button, Container,Typography,Card,CardContent} from '@mui/material'
 import RemoveIcon from '@mui/icons-material/Remove';
+import {NavLink ,Navigate} from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import '../customClass.css';
+import { getToken } from '../../../services/jwtService';
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart, clearCart, decreaseCart, getTotals, removeFormCart } from '../../../features/counter/cartSlice';
 
 const Cart = () => {
+  const {access_token}=getToken()
   const cart=useSelector((state)=>state.counter);
   console.log(cart )
 const dispatch=useDispatch()
@@ -74,7 +78,7 @@ const handleClearCart=()=>{
                     <Button 
                     sx={{marginRight:"5px"}} 
                     onClick={()=>handleAddToCart(cartItem)}>
-                      <span style={{fontSize:'42px',fontWeight:'1',color:'black'}}>&#60;</span>
+                      <span style={{fontSize:'42px',fontWeight:'1',color:'black'}}>+</span>
                     </Button>
                    <span sx={{fontSize:'18px'}}> {cartItem.cartQuantity} </span>
                    <Button 
@@ -82,7 +86,7 @@ const handleClearCart=()=>{
                   
                   onClick={()=>handleDecreaseCart(cartItem)}
                   >
-                    <span style={{fontSize:'42px',fontWeight:'1',color:'black'}}>&#62;</span>
+                    <span style={{fontSize:'42px',fontWeight:'1',color:'black'}}>-</span>
                    </Button>
                    </TableCell>
                   <TableCell sx={{fontSize:'17px'}}align="right">Rs:{cartItem.price}</TableCell>
@@ -119,7 +123,7 @@ const handleClearCart=()=>{
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" >Checkout</Button>
+                <Button size="small" component={NavLink} to={access_token? '/checkout' : '/login'}>Checkout</Button>
               </CardActions>
             </Card>
           </Grid>
@@ -132,6 +136,7 @@ const handleClearCart=()=>{
       onClick={()=>handleClearCart()}
       >Clear Cart</Button>
       </Box>
+      <ToastContainer />
     </Container>
   )
 }
