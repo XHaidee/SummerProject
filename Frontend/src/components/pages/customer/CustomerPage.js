@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios';
-import { toast,ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Container,Grid,Button,TextField,Card,Typography,CardContent,CardActions,Box } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,8 @@ import {useGetLoggedUserQuery} from '../../../services/userAuthApi'
 import {useState,useEffect} from "react";
 import { setCustomer } from '../../../features/authentication/customerSlice';
 import { useDispatch ,useSelector} from 'react-redux';
+import Footer from '../footer';
+import '../product.css';
 const CustomerPage = () => {
   //DECLARING CUSTOMER EDIT INFORMATION SECTION
   const [cust,setcust]=useState({
@@ -79,7 +81,7 @@ async  function  onFormSubmit(e){
   const config={headers :{
     Authorization:`Bearer ${access_token}`,'Content-Type':'application/json'}};
   const URL =`http://127.0.0.1:8000/api/user/customerapi/2/`;
-  axios.put(URL,data,config).then(res=>{console.log(res.data);})
+  axios.put(URL,data,config).then(res=>{console.log(res.data);   })
 		.catch((error)=>console.log(error))
   
   document.getElementById("reg-form").reset();
@@ -93,22 +95,6 @@ async  function  onFormSubmit(e){
   //   //   name: data.name,
   //   // })
   // }
-  
- 
-  //LOG OUT SECTION
-    
-    const handleLogout=()=>{
-      localStorage.removeItem('access_token')
-      localStorage.removeItem('refresh_token')
-    
-      //DESTROYIN TOKEN
-     if(!localStorage.getItem('access_token')){
-      toast.info('product added',{position:"bottom-left",});
-      navigate("/login")
-     
-     }
-     
-    }
 
     //<-------------ORDER SECTION START HERE ------------->
      //ORDER SUMMERY
@@ -128,127 +114,64 @@ async  function  onFormSubmit(e){
   const config={headers :{
   Authorization:`Bearer ${access_token}`,'Content-Type':'application/json'}};
 
-  axios.post(URL,value,config).then(res=>{console.log(res.data);})
-  .catch((error)=>console.log(error))
+  axios.post(URL,value,config).then(res=>{console.log(res.data);  navigate("/checkout");  })
+  .catch((error)=>console.log(error));
   }
 
-
-
-
-
-
-
-
 return (
-    <Container maxWidth="md">  
+  <>
+  <hr/>
+    <Container sx={{margin:'auto'}}>  
     <Box> 
-      <div></div>
-<Grid container spacing={2}>
-  
-  <Grid  xs={1}>
-        </Grid> 
-        <Grid  xs={5}>
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{ width: 475, textAlign:"center",margin:'auto',backgroundColor:'black', border:'solid 2px #404040' }}>
               <CardContent>
-              <Typography sx={{ fontSize: 34 }} color="text.secondary" gutterBottom>
+              <Typography sx={{ fontSize: 34,color:'#66FCF1 !important' }}  gutterBottom>
                  Hello  : {userData .name}
                 </Typography>
-               
-                <Typography variant="h5" component="div">
-                  Manage Your Order
-                </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary" >
-                </Typography>
+                <h2 align="center"  style={{color:"#45A29E"}}>Your Orders:</h2> <br/>
                 <div>
        <div>
-            <table>
-            <tr>
-                <th>Product Name</th>
+        <hr/>
+            <table style={{margin:'auto',color:"#45A29E",fontSize:'20px',width:'80%'}}>
+            <tr className='trow' style={{ border: 'solid 2px #45A29E !important',padding:'10em !important'}}>
+                <th >Product Name</th>
                 <th>Price</th>
                 <th>Quantity</th>
             </tr>
             {cart.cartItems.map((cartItem) => (
-            <tr>
+            <tr style={{ border: 'solid 2px #45A29E !important'}}>
                 <td>{cartItem.product_name}</td>
                 <td>{cartItem.price}</td>
                 <td>{cartItem.cartQuantity}</td>
             </tr>
                 ))}
             </table>
-            <div>
+            <hr/>
+            <div style={{margin:'30px 10px 10px 10px',textAlign:'left',color: '#45A29E'}}>
                  Cart Total Amount Rs:{amount}
             </div>
-            <div>
+           
+            <div style={{margin:'10px 10px',textAlign:'left',color: '#45A29E'}}>
                  Cart Total Quantity Rs:{quantity}
             </div> 
             <div>
-                
             </div> 
             <div>
             </div>  
        </div>
-        <Button onClick={order} sx={{backgroundColor:'#ffd426',color:'#cc3300',
-                        mt:3}}>Place order</Button>
+        <Button onClick={order} className='order' sx={{ margin:"1em 0em", borderRadius: '0px !important',  border:' solid 2px #66FCF1 !important',
+  color:'#C5C6C7 !important',
+  fontSize: '18px !important'}}>Place order</Button>
         
          </div>
               </CardContent>
-              <CardActions>
-                <Button  component={NavLink} to='/Checkout' size="small"  sx={{backgroundColor:'#ffd426',color:'#cc3300',
-                        mt:3}}>Payment Method</Button>
-              </CardActions>
+             
             </Card>
-          </Grid>
-    
-         <Grid  xs={1}></Grid>
-        <Grid  xs={5}>
-        <Card sx={{ minWidth: 275 }}>
-              <CardContent>
-              {/* <Typography sx={{ fontSize: 34 }} color="text.secondary" gutterBottom>
-                 Hello  : {userData .name}
-                </Typography> */}
-               
-                <Typography variant="h5" component="div">
-                 
-                </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary" >
-                </Typography>
-
-                <Box component=""noValidate sx={{mt:3 ,color:'#cc3300'}} id="reg-form">
-                  <Box>
-                    <h1>EDIT YOUR INFORMATION</h1>
-                  {/* </Box>
-                  
-                    <TextField  onChange={(evt)=>handle(evt)} sx={{mt:3,color:'red'}} required fullWidth id='name' name="customer_name" label="User Name"/>
-                  <TextField onChange={(evt)=> handle(evt)} sx={{mt:3,color:'red'}} required fullWidth id='phone' name="phone" label="Phone" type='number'/> 
-                    <TextField onChange={(evt)=>handle(evt)}  sx={{mt:3,color:'red'}} required fullWidth id='address' name="address" label="address"/> 
-                    <Box textAlign='center'>  */}
-                        <Button type="submit" onClick={e=>onFormSubmit(e)} sx={{backgroundColor:'#ffd426',color:'#cc3300',
-                        mt:3}}>
-                          Edit
-                        </Button>
-                    </Box>   
-                 </Box>
-              </CardContent>
-              {/* <CardActions>
-                <Button  component={NavLink} to='/Checkout' size="small" >Checkout</Button>
-              </CardActions> */}
-            </Card>
-          </Grid>
-      </Grid>
-
-       
-
-
-    
       </Box>
-      <Button variant="outlined" onClick={handleLogout} sx={{color:' #e65c00'}} >
-      
-              Logout
-            </Button>
             <ToastContainer />
-
     </Container>
-    
+    <Footer/>
+    </>
   )
 }
 

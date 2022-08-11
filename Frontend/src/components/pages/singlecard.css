@@ -1,8 +1,23 @@
 .singlecard-component{
-    -webkit-box-shadow: 0 0 10px gray;
-  box-shadow: 0 0 10px gray;
+    -webkit-box-shadow: none !important;
+  box-shadow: none !important;
   cursor:pointer;
+  background-color: black !important; margin-bottom: 5em !important;
+  border:solid 2px #404040;
 }
 .singlecard-component:hover{
     transform:scale(1.01)
+}
+.addcartbutton{
+  border-radius: 0px !important;
+  border: solid 2px #66FCF1 !important;
+  color:#C5C6C7 !important;
+  font-size: 18px !important;
+  margin-top: 2em !important;
+  width: 98% !important;
+}
+.addcartbutton:hover{
+
+  color:black !important;
+  background-color:#66FCF1 !important;
 }

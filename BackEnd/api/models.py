@@ -123,7 +123,7 @@ class Order(models.Model):
     quantity=models.PositiveBigIntegerField(default=1)
     total=models.PositiveBigIntegerField()
     ordered_date=models.DateTimeField(auto_now_add=True)
-    status=models.CharField(max_length=50,choices=STATUS_CHOICES,default='panding')
+    status=models.CharField(max_length=50,choices=STATUS_CHOICES,default='pending')
     def __int__(self):
         return self.id
 

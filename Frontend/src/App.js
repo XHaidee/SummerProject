@@ -1,4 +1,5 @@
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom"; 
+import './App.css';
 import Contact from "./components/pages/Contact";
 import Layout from "./components/pages/Layout";
 import Home from "./components/pages/Home"
@@ -13,6 +14,7 @@ import CustomerPage from "./components/pages/customer/CustomerPage";
 import { useSelector } from "react-redux";
 import SingleProduct from "./components/pages/SingleProduct";
 import Checkout from "./components/pages/Checkout/Checkout";
+import Order from "./components/order/Order";
 function App() {
    const {access_token}=useSelector(state=>state.auth)
   return (
@@ -33,7 +35,8 @@ function App() {
           <Route path="add/" element={<AddProducts/>}/>
           <Route path="customer/" element={<CustomerPage/>}/>
           <Route path="checkout/" element={<Checkout/>}/>
-          <Route path="order/" element={<ManageOrders/>}/>
+          <Route path="manageorder/" element={<ManageOrders/>}/>
+          <Route path="order/" element={<Order/>}/>
           </Route> 
           
      </Routes> 

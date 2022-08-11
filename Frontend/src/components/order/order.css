@@ -1,0 +1,9 @@
+.orderbton:hover{
+    color:white !important;
+    background-color:black !important;
+
+  }
+  .tabroww:hover{
+    transform: scale(1.01);
+    background-color: #101010;
+  }

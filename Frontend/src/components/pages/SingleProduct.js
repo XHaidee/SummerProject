@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import './singlecard.css';
 import { addToCart } from '../../features/counter/cartSlice';
+import Footer from './footer';
 
 const SingleProduct = () => {
   //STYLE CUTOM THEME
@@ -50,11 +51,13 @@ const SingleProduct = () => {
 
 
   return (
-    <Box sx={{ flexGrow: 1,paddingTop:'1rem !important',width:'500px', margin:"auto" }} >
+    <>
+    <hr/>
+    <Box sx={{ flexGrow: 1,paddingTop:'1rem !important',width:'600px', margin:"auto" }} >
      
-          <h2 style={{padding:'1rem'}}>Product Detail View</h2>
+          <h2 style={{textAlign:'center',padding:'1rem',color:'#C5C6C7'}}>Product Detail View</h2>
       
-        <Card className='singlecard-component' key={product.id}  sx={{width:'90%',height:'500px', margin:'auto',boxShadow: '10px 5px 5px gray'}} >
+        <Card className='singlecard-component' key={product.id}  sx={{width:'90%',height:'520px', margin:'auto',boxShadow: '10px 5px 5px gray'}} >
       <CardMedia
         component="img"
         height="260"
@@ -63,19 +66,18 @@ const SingleProduct = () => {
         
       />
       <CardContent sx={{padding:'1em'}}>
-        <Typography gutterBottom variant="h6" component="div"  >
+        <Typography gutterBottom variant="h6" component="div" sx={{color:'#66FCF1',fontSize:'24px'}} >
           {product.product_name}
           </Typography>
-          <Typography variant="body2" color="text.secondary"  >
+    <Typography variant="body2" color="text.secondary" sx={{color:'#C5C6C7',fontSize:'18px'}}  >
           {product.desc}
           
-          </Typography> <br/>
-          <Typography>
+          </Typography> 
+          <Typography sx={{color:'#C5C6C7',fontSize:'22px'}}>
             Rs:
             {product.price}
           </Typography>
-              <Button  onClick={()=> handleAddToCart(product)} sx={{backgroundColor:'#ffd426',color:'#cc3300',
-                 mt:3}}>
+              <Button  onClick={()=> handleAddToCart(product)} className='addcartbutton'>
                    Add To Cart
                 </Button>
       </CardContent>
@@ -86,6 +88,8 @@ const SingleProduct = () => {
          
  
     </Box>
+    <Footer/>
+    </>
   )
 }
 

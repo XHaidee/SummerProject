@@ -1,12 +1,13 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react';
+import { toast,ToastContainer } from 'react-toastify';
 import { TextField,Button,Box } from "@mui/material";
 import { NavLink,useNavigate} from "react-router-dom";
 import { useLoginUserMutation } from '../../../services/userAuthApi';
 import { getToken, storeToken } from '../../../services/jwtService';
 import { useDispatch } from 'react-redux';
-import {ToastContainer } from 'react-toastify';
 import { setUserToken } from '../../../features/authentication/authSlice';
 import Home from '../Home';
+import './auth.css'
 const UserLogin = () => {
     const [error,setError]=useState({
         eamil:"",
@@ -35,9 +36,13 @@ const dispatch=useDispatch();
                 dispatch(setUserToken({access_token:access_token}))
                 
                 if(res.data.admin==1){
+                    localStorage.setItem('admin', 1);
+                    toast.info('Welcome  Admin',{position:"bottom-left",});
                     navigate('/admin');
+                    
                 }
                 else{
+               
                 navigate('/customer')
                 
                 }
@@ -84,26 +89,27 @@ const dispatch=useDispatch();
   
   return (
     <>
-          <Box component="form"noValidate sx={{mt:3 ,color:'#cc3300'}} id="login-form"
+     
+          <Box component="form"width={500} noValidate sx={{mt:3,margin:'auto',paddingTop:'1em' }} id="login-form"
           onSubmit={handlesubmit}> 
             <TextField required fullWidth id='email' name="email" label="Email Address"/>
             {error!=="" ? <div>{error.email}</div>:""}
             <TextField sx={{mt:3,color:'red'}} required fullWidth id='password' name="password" label="Password Address" type='password'/>
             {error!=="" ? <div>{error.password}</div>:""}
              <Box textAlign='center'> 
-                 <Button type="submit" sx={{backgroundColor:'#ffd426',color:'#cc3300',
-                    mt:3}}>
+                 <Button className='log'  type="submit" sx={{ padding:'0.5em 2em',margin:"1em 1em", borderRadius: '0px !important',  border:' solid 2px black !important',
+  color:'#000 !important',
+  fontSize: '18px !important'}}>
                      Login
                 </Button>
                    
                 
                  
              </Box>
-             <NavLink to="/" style={{textDecoration:"none"}} >
-                 <div style={s}> Forgot Password? </div> 
-             </NavLink>
+           
              <ToastContainer />
              </Box>
+             <ToastContainer />
     </>
   )
 }

@@ -1,0 +1,16 @@
+.empty-cart{
+    font-size:48px ;
+   padding-top: 100px;
+}
+.empty{
+    height: 250px !important;
+}
+.clearcart:hover{
+
+    color:black !important;
+    background-color:#66FCF1 !important;
+}
+.summary{
+    background-color: black !important;
+    border:solid 1px #404040;
+}

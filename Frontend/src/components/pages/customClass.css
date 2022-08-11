@@ -1,21 +1,80 @@
 .customClass{
-    display:inline-flex; 
-      
+   display: inline-flex;
+    
 }
 .card{
     flex: 0 0 200px;
     /* flex: 1; */
     margin: 10px;
-    border: 1px solid #ccc;
+   
     box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
 }
 .homecard{
-    margin: 1em;
+    margin: 0.8em;
     cursor: pointer;
+    border: 1px solid #404040 !important;
+    border-radius:0px !important ;
+   
+  
+}
+.product-sec{
+
+
+   
+}
+.imgcaro{
+    object-fit: cover;
+    position: relative;
 }
 .homecard:hover{
     transform:scale(1.01)
 }
 .custable{
     width:780px !important;
+    background-color: black !important;
+    border:solid 1px #404040;
+}
+.footer{
+    display: flex;
+    flex-direction: row;
+    margin:1em 2em 0em 2em;
+    border-top:solid 1px #404040;
+}
+.aboutus{
+    color: #C5C6C7;
+    margin: 1em;
+    width: 33%;
+}
+.contacts{
+    color: #C5C6C7;
+    margin: 1em;
+    width: 33%;
+   
+}
+.mapsec{
+color: #C5C6C7;
+margin: 1em;
+width: 33%;
+}
+.contact{
+    display: flex;
+    text-align: center !important;
+    margin: 0em 1em;
+}
+.contact-t{
+    font-size: 18px;
+    
+}
+.socialicon{
+    display: flex;
+    color: #C5C6C7;
+   background-color: #1a1a1a;
+   flex-direction: row;
+   justify-content: center;
+   padding: 5px;
+  
+}
+.css-i4bv87-MuiSvgIcon-root {
+    font-size: 35px !important;
+    margin-right: 12px;
 }
